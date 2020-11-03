@@ -1,5 +1,5 @@
-defmodule CardTest do
+defmodule Poker.CardTest do
   use ExUnit.Case, async: true
 
-  doctest Card
+  doctest Poker.Card
 end

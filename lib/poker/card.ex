@@ -1,7 +1,8 @@
-defmodule Card do
+defmodule Poker.Card do
   @moduledoc false
   @enforce_keys [:suit, :value]
   defstruct [:suit, :value]
+  alias Poker.Card
 
   @type t() :: %__MODULE__{
     suit: String.t(),
