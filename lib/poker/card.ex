@@ -13,13 +13,11 @@ defmodule Poker.Card do
   Init Card struct
   ## Examples
 
-    iex> alias Poker.Card
-    iex> Card.init("3S")
-    iex> %Card{suit: "S", value: 3}
+    iex> Poker.Card.init("3S")
+    %Poker.Card{suit: "S", value: "3"}
 
-    iex> alias Poker.Card
-    iex> Card.init("10D")
-    iex> %Card{suit: "D", value: 10}
+    iex> Poker.Card.init("10D")
+    %Poker.Card{suit: "D", value: "10"}
   """
   @spec init(string :: String.t()) :: Card.t()
   def init(string) do
