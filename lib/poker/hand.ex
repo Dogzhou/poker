@@ -1,12 +1,12 @@
 defmodule Poker.Hand do
   @moduledoc false
-  alias Poker.{Card, Hand}
+  alias Poker.{Card, Hand, Classify}
   @enforce_keys [:cards, :category]
   defstruct [:cards, :category]
 
   @type t() :: %__MODULE__{
     cards: [Card.t()],
-    category: :atom
+    category: Classify.category
   }
 
   @doc """

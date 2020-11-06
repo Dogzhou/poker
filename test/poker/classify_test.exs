@@ -1,6 +1,6 @@
 defmodule ClassifyTest do
   use ExUnit.Case
-  alias Poker.Hand
+  alias Poker.{Hand, Classify}
 
   describe "straight flush" do
     @describetag :function
@@ -34,7 +34,7 @@ defmodule ClassifyTest do
     @describetag :function
 
     test "returns true" do
-      hand = Hand.init(~w(3D 5D 6D 7D 8D))
+      hand = Hand.init(~w(3D 3H 3S 3C 8D))
 
       assert Classify.classify(hand) == :four_of_a_kind
     end
