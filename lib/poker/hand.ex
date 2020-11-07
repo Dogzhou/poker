@@ -13,14 +13,14 @@ defmodule Poker.Hand do
   Init Hand struct
   ## Examples
 
-    iex> Poker.Hand.init(~w(4D 5S 6S 8D 3C))
+    iex> Poker.Hand.init(~w(4D 5S 6S QD AC))
     %Poker.Hand{
       cards: [
-        %Poker.Card{suit: "D", value: "4"},
-        %Poker.Card{suit: "S", value: "5"},
-        %Poker.Card{suit: "S", value: "6"},
-        %Poker.Card{suit: "D", value: "8"},
-        %Poker.Card{suit: "C", value: "3"}],
+        %Poker.Card{suit: "D", display_value: "4", int_value: 4},
+        %Poker.Card{suit: "S", display_value: "5", int_value: 5},
+        %Poker.Card{suit: "S", display_value: "6", int_value: 6},
+        %Poker.Card{suit: "D", display_value: "Q", int_value: 12},
+        %Poker.Card{suit: "C", display_value: "A", int_value: 14}],
       category: :unknown}
   """
   @spec init(string :: [[String.t()]]) :: Hand.t()

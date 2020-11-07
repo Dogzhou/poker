@@ -32,13 +32,13 @@ defmodule Poker.Classify do
   end
 
   defp straight?(hand) do
-    hand_values = Enum.map_join(hand.cards, "", &(&1.value))
+    hand_values = Enum.map_join(hand.cards, "", &(&1.display_value))
 
     @a_high_flush =~ hand_values || @a_low_flush =~ hand_values
   end
 
   defp four_of_a_kind?(hand) do
-    hand_values = Enum.map(hand.cards, &(&1.value))
+    hand_values = Enum.map(hand.cards, &(&1.display_value))
 
     hand_values |> Enum.uniq() |> length |> Kernel.==(2)
   end
