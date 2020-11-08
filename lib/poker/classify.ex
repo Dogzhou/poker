@@ -15,6 +15,7 @@ defmodule Poker.Classify do
     cond do
       straight_flush?(cards) -> :straight_flush
       four_of_a_kind?(cards) -> :four_of_a_kind
+      full_house?(cards) -> :full_house
       true -> :pair
     end
   end
@@ -38,8 +39,27 @@ defmodule Poker.Classify do
   end
 
   defp four_of_a_kind?(cards) do
-    hand_values = Enum.map(cards, &(&1.display_value))
+    grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
 
-    hand_values |> Enum.uniq() |> length |> Kernel.==(2)
+    grouped_size(grouped_hand_values) == 2 && large_value_size(grouped_hand_values) == 4
+  end
+
+  defp full_house?(cards) do
+    grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
+
+    grouped_size(grouped_hand_values) == 2 && large_value_size(grouped_hand_values) == 3
+  end
+
+  defp grouped_size(grouped_hand_values) do
+    grouped_hand_values
+    |> Map.keys()
+    |> length()
+  end
+
+  defp large_value_size(grouped_hand_values) do
+    grouped_hand_values
+    |> Map.values()
+    |> Enum.max_by(&(length(&1)))
+    |> length()
   end
 end

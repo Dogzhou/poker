@@ -39,5 +39,15 @@ defmodule ClassifyTest do
       assert Classify.classify(hand.cards) == :four_of_a_kind
     end
   end
+
+  describe "full house" do
+    @describetag :function
+
+    test "returns true" do
+      hand = Hand.init(~w(3D 3H 3S 8C 8D))
+
+      assert Classify.classify(hand.cards) == :full_house
+    end
+  end
 end
 
