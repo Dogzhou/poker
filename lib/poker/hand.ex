@@ -13,23 +13,24 @@ defmodule Poker.Hand do
   Init Hand struct
   ## Examples
 
-    iex> Poker.Hand.init(~w(4D 5S 6S QD AC))
+    iex> Poker.Hand.init(~w(10D JD QD KD AD))
     %Poker.Hand{
       cards: [
-        %Poker.Card{suit: "D", display_value: "4", int_value: 4},
-        %Poker.Card{suit: "S", display_value: "5", int_value: 5},
-        %Poker.Card{suit: "S", display_value: "6", int_value: 6},
+        %Poker.Card{suit: "D", display_value: "10", int_value: 10},
+        %Poker.Card{suit: "D", display_value: "J", int_value: 11},
         %Poker.Card{suit: "D", display_value: "Q", int_value: 12},
-        %Poker.Card{suit: "C", display_value: "A", int_value: 14}],
-      category: :unknown}
+        %Poker.Card{suit: "D", display_value: "K", int_value: 13},
+        %Poker.Card{suit: "D", display_value: "A", int_value: 14}],
+      category: :straight_flush}
   """
   @spec init(string :: [[String.t()]]) :: Hand.t()
   def init(input) do
     cards = input |> Enum.map(&(Card.init(&1)))
+    category = Classify.classify(cards)
 
     %__MODULE__{
       cards: cards,
-      category: :unknown
+      category: category
     }
   end
 end

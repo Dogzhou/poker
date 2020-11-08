@@ -37,7 +37,5 @@ defmodule Poker.Card do
   defp get_int_value("Q"), do: 12
   defp get_int_value("K"), do: 13
   defp get_int_value("A"), do: 14
-  defp get_int_value(display_value) do
-    String.to_integer(display_value)
-  end
+  defp get_int_value(display_value), do: String.to_integer(display_value)
 end
