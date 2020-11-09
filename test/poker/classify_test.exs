@@ -49,5 +49,65 @@ defmodule ClassifyTest do
       assert Classify.classify(hand.cards) == :full_house
     end
   end
+
+  describe "flush" do
+    @describetag :function
+
+    test "returns true" do
+      hand = Hand.init(~w(3D 4D 8D 10D QD))
+
+      assert Classify.classify(hand.cards) == :flush
+    end
+  end
+
+  describe "straight" do
+    @describetag :function
+
+    test "returns true" do
+      hand = Hand.init(~w(AD 2S 3H 4C 5D))
+
+      assert Classify.classify(hand.cards) == :straight
+    end
+  end
+
+  describe "three of a kind" do
+    @describetag :function
+
+    test "returns true" do
+      hand = Hand.init(~w(AD AS AH 4C 5D))
+
+      assert Classify.classify(hand.cards) == :three_of_a_kind
+    end
+  end
+
+  describe "two pairs" do
+    @describetag :function
+
+    test "returns true" do
+      hand = Hand.init(~w(2D 2S 4H 4C 5D))
+
+      assert Classify.classify(hand.cards) == :two_pairs
+    end
+  end
+
+  describe "one pair" do
+    @describetag :function
+
+    test "returns true" do
+      hand = Hand.init(~w(2D 2S 3H 4C 5D))
+
+      assert Classify.classify(hand.cards) == :one_pair
+    end
+  end
+
+  describe "high card" do
+    @describetag :function
+
+    test "returns true" do
+      hand = Hand.init(~w(2D 3S 5H 6C 7D))
+
+      assert Classify.classify(hand.cards) == :high_card
+    end
+  end
 end
 

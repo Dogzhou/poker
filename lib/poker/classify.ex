@@ -2,8 +2,8 @@ defmodule Poker.Classify do
   @moduledoc """
   Classify cards category
   """
-  alias Poker.{Card, Hand}
-  @typep category :: :flush | :four_of_a_kind | :full_house | :high_card | :pair | :straight | :straight_flush | :three_of_a_kind | :two_pairs | :unknown
+  alias Poker.Card
+  @typep category :: :flush | :four_of_a_kind | :full_house | :high_card | :one_pair | :straight | :straight_flush | :three_of_a_kind | :two_pairs
   @a_high_flush "2345678910JQKA"
   @a_low_flush  "A2345678910JQK"
 
@@ -16,7 +16,12 @@ defmodule Poker.Classify do
       straight_flush?(cards) -> :straight_flush
       four_of_a_kind?(cards) -> :four_of_a_kind
       full_house?(cards) -> :full_house
-      true -> :pair
+      flush?(cards) -> :flush
+      straight?(cards) -> :straight
+      three_of_a_kind?(cards) -> :three_of_a_kind
+      two_pairs?(cards) -> :two_pairs
+      one_pair?(cards) -> :one_pair
+      true -> :high_card
     end
   end
 
@@ -48,6 +53,24 @@ defmodule Poker.Classify do
     grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
 
     grouped_size(grouped_hand_values) == 2 && large_value_size(grouped_hand_values) == 3
+  end
+
+  defp three_of_a_kind?(cards) do
+    grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
+
+    grouped_size(grouped_hand_values) == 3 && large_value_size(grouped_hand_values) == 3
+  end
+
+  defp two_pairs?(cards) do
+    grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
+
+    grouped_size(grouped_hand_values) == 3 && large_value_size(grouped_hand_values) == 2
+  end
+
+  defp one_pair?(cards) do
+    grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
+
+    grouped_size(grouped_hand_values) == 4 && large_value_size(grouped_hand_values) == 2
   end
 
   defp grouped_size(grouped_hand_values) do
