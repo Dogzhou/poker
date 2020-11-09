@@ -7,7 +7,7 @@ defmodule Poker.Card do
   @type t() :: %__MODULE__{
     suit: String.t(),
     display_value: String.t(),
-    int_value: Integer
+    int_value: integer()
   }
 
   @doc """

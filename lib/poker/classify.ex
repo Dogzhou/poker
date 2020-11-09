@@ -3,7 +3,7 @@ defmodule Poker.Classify do
   Classify cards category
   """
   alias Poker.Card
-  @typep category :: :flush | :four_of_a_kind | :full_house | :high_card | :one_pair | :straight | :straight_flush | :three_of_a_kind | :two_pairs
+  @type category :: :flush | :four_of_a_kind | :full_house | :high_card | :one_pair | :straight | :straight_flush | :three_of_a_kind | :two_pairs
   @a_high_flush "2345678910JQKA"
   @a_low_flush  "A2345678910JQK"
 
