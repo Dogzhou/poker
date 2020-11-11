@@ -2,7 +2,7 @@ defmodule Poker.Classify do
   @moduledoc """
   Classify cards category
   """
-  alias Poker.Card
+  alias Poker.{Card, Utils}
   @type category :: :flush | :four_of_a_kind | :full_house | :high_card | :one_pair | :straight | :straight_flush | :three_of_a_kind | :two_pairs
   @a_high_flush "2345678910JQKA"
   @a_low_flush  "A2345678910JQK"
@@ -46,43 +46,30 @@ defmodule Poker.Classify do
   defp four_of_a_kind?(cards) do
     grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
 
-    grouped_size(grouped_hand_values) == 2 && large_value_size(grouped_hand_values) == 4
+    Utils.grouped_size(grouped_hand_values) == 2 && Utils.large_value_size(grouped_hand_values) == 4
   end
 
   defp full_house?(cards) do
     grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
 
-    grouped_size(grouped_hand_values) == 2 && large_value_size(grouped_hand_values) == 3
+    Utils.grouped_size(grouped_hand_values) == 2 && Utils.large_value_size(grouped_hand_values) == 3
   end
 
   defp three_of_a_kind?(cards) do
     grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
 
-    grouped_size(grouped_hand_values) == 3 && large_value_size(grouped_hand_values) == 3
+    Utils.grouped_size(grouped_hand_values) == 3 && Utils.large_value_size(grouped_hand_values) == 3
   end
 
   defp two_pairs?(cards) do
     grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
 
-    grouped_size(grouped_hand_values) == 3 && large_value_size(grouped_hand_values) == 2
+    Utils.grouped_size(grouped_hand_values) == 3 && Utils.large_value_size(grouped_hand_values) == 2
   end
 
   defp one_pair?(cards) do
     grouped_hand_values = Enum.group_by(cards, &(&1.int_value))
 
-    grouped_size(grouped_hand_values) == 4 && large_value_size(grouped_hand_values) == 2
-  end
-
-  defp grouped_size(grouped_hand_values) do
-    grouped_hand_values
-    |> Map.keys()
-    |> length()
-  end
-
-  defp large_value_size(grouped_hand_values) do
-    grouped_hand_values
-    |> Map.values()
-    |> Enum.max_by(&(length(&1)))
-    |> length()
+    Utils.grouped_size(grouped_hand_values) == 4 && Utils.large_value_size(grouped_hand_values) == 2
   end
 end
