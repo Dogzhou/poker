@@ -1,6 +1,6 @@
-defmodule ClassifyTest do
+defmodule ClassifierTest do
   use ExUnit.Case
-  alias Poker.{Hand, Classify}
+  alias Poker.{Hand, Classifier}
 
   describe "straight flush" do
     @describetag :function
@@ -8,25 +8,25 @@ defmodule ClassifyTest do
     test "without special letters" do
       hand = Hand.init(~w(4D 5D 6D 7D 8D))
 
-      assert Classify.classify(hand.cards) == :straight_flush
+      assert Classifier.classify(hand.cards) == :straight_flush
     end
 
     test "with special letters" do
       hand = Hand.init(~w(10D JD QD KD AD))
 
-      assert Classify.classify(hand.cards) == :straight_flush
+      assert Classifier.classify(hand.cards) == :straight_flush
     end
 
     test "with A as lowest letters" do
       hand = Hand.init(~w(AD 2D 3D 4D 5D))
 
-      assert Classify.classify(hand.cards) == :straight_flush
+      assert Classifier.classify(hand.cards) == :straight_flush
     end
 
     test "with A as highest letters" do
       hand = Hand.init(~w(10D JD QD KD AD))
 
-      assert Classify.classify(hand.cards) == :straight_flush
+      assert Classifier.classify(hand.cards) == :straight_flush
     end
   end
 
@@ -36,7 +36,7 @@ defmodule ClassifyTest do
     test "returns true" do
       hand = Hand.init(~w(3D 3H 3S 3C 8D))
 
-      assert Classify.classify(hand.cards) == :four_of_a_kind
+      assert Classifier.classify(hand.cards) == :four_of_a_kind
     end
   end
 
@@ -46,7 +46,7 @@ defmodule ClassifyTest do
     test "returns true" do
       hand = Hand.init(~w(3D 3H 3S 8C 8D))
 
-      assert Classify.classify(hand.cards) == :full_house
+      assert Classifier.classify(hand.cards) == :full_house
     end
   end
 
@@ -56,7 +56,7 @@ defmodule ClassifyTest do
     test "returns true" do
       hand = Hand.init(~w(3D 4D 8D 10D QD))
 
-      assert Classify.classify(hand.cards) == :flush
+      assert Classifier.classify(hand.cards) == :flush
     end
   end
 
@@ -66,7 +66,7 @@ defmodule ClassifyTest do
     test "returns true" do
       hand = Hand.init(~w(AD 2S 3H 4C 5D))
 
-      assert Classify.classify(hand.cards) == :straight
+      assert Classifier.classify(hand.cards) == :straight
     end
   end
 
@@ -76,7 +76,7 @@ defmodule ClassifyTest do
     test "returns true" do
       hand = Hand.init(~w(AD AS AH 4C 5D))
 
-      assert Classify.classify(hand.cards) == :three_of_a_kind
+      assert Classifier.classify(hand.cards) == :three_of_a_kind
     end
   end
 
@@ -86,7 +86,7 @@ defmodule ClassifyTest do
     test "returns true" do
       hand = Hand.init(~w(2D 2S 4H 4C 5D))
 
-      assert Classify.classify(hand.cards) == :two_pairs
+      assert Classifier.classify(hand.cards) == :two_pairs
     end
   end
 
@@ -96,7 +96,7 @@ defmodule ClassifyTest do
     test "returns true" do
       hand = Hand.init(~w(2D 2S 3H 4C 5D))
 
-      assert Classify.classify(hand.cards) == :one_pair
+      assert Classifier.classify(hand.cards) == :one_pair
     end
   end
 
@@ -106,7 +106,7 @@ defmodule ClassifyTest do
     test "returns true" do
       hand = Hand.init(~w(2D 3S 5H 6C 7D))
 
-      assert Classify.classify(hand.cards) == :high_card
+      assert Classifier.classify(hand.cards) == :high_card
     end
   end
 end

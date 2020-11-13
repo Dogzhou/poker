@@ -1,12 +1,12 @@
 defmodule Poker.Hand do
   @moduledoc false
-  alias Poker.{Card, Hand, Classify}
+  alias Poker.{Card, Hand, Classifier}
   @enforce_keys [:cards, :category]
   defstruct [:cards, :category]
 
   @type t() :: %__MODULE__{
     cards: [Card.t()],
-    category: Classify.category
+    category: Classifier.category
   }
 
   @doc """
@@ -26,7 +26,7 @@ defmodule Poker.Hand do
   @spec init(string :: [[String.t()]]) :: Hand.t()
   def init(input) do
     cards = input |> Enum.map(&(Card.init(&1)))
-    category = Classify.classify(cards)
+    category = Classifier.classify(cards)
 
     %__MODULE__{
       cards: cards,

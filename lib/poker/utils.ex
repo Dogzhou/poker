@@ -1,5 +1,6 @@
 defmodule Poker.Utils do
   @moduledoc false
+  alias Poker.Card
 
   @doc """
   ## Examples
@@ -12,7 +13,7 @@ defmodule Poker.Utils do
     iex> Poker.Utils.grouped_size(grouped_hand_values)
     3
   """
-  @spec grouped_size(grouped_hand_values :: %{integer() => [Poker.Card.t()]}) :: integer()
+  @spec grouped_size(grouped_hand_values :: %{integer() => [Card.t()]}) :: integer()
   def grouped_size(grouped_hand_values) do
     grouped_hand_values
     |> Map.keys()
@@ -30,7 +31,7 @@ defmodule Poker.Utils do
     iex> Poker.Utils.large_value_size(grouped_hand_values)
     2
   """
-  @spec large_value_size(grouped_hand_values :: %{integer() => [Poker.Card.t()]}) :: integer()
+  @spec large_value_size(grouped_hand_values :: %{integer() => [Card.t()]}) :: integer()
   def large_value_size(grouped_hand_values) do
     grouped_hand_values
     |> Map.values()

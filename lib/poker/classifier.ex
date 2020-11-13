@@ -1,4 +1,4 @@
-defmodule Poker.Classify do
+defmodule Poker.Classifier do
   @moduledoc """
   Classify cards category
   """
