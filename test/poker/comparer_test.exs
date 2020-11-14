@@ -1,23 +1,29 @@
 defmodule ComparerTest do
   use ExUnit.Case, async: true
   alias Poker.{Hand, Comparer}
+  @straight_flush_hand  Hand.init(~w(2D 3D 4D 5D 6D))
+  @straight_flush_handB Hand.init(~w(2S 3S 4S 5S 6S))
+  @four_of_a_kind_hand  Hand.init(~w(JD AH AC AD AS))
+  @full_house_hand      Hand.init(~w(AD AC AS KC KD))
+  @flush_hand           Hand.init(~w(3D 4D 5D 6D 8D))
 
   describe "compared hands are in different category" do
     test "straight_flush over four_of_a_kind" do
-      winner_hands = [Hand.init(~w(2D 3D 4D 5D 6D)), Hand.init(~w(2S 3S 4S 5S 6S))]
-      four_of_a_kind_hand = Hand.init(~w(JD AH AC AD AS))
+      result = Comparer.compare([@straight_flush_hand, @straight_flush_handB], @four_of_a_kind_hand)
 
-      result = Comparer.compare(winner_hands, four_of_a_kind_hand)
-      assert result == winner_hands
+      assert result == [@straight_flush_hand, @straight_flush_handB]
     end
 
     test "four_of_a_kind over full_house" do
-      four_of_a_kind_hand = Hand.init(~w(JD AH AC AD AS))
-      winner_hands = [four_of_a_kind_hand]
-      handB = Hand.init(~w(AD AC AD KC KD))
+      result = Comparer.compare([@four_of_a_kind_hand], @full_house_hand)
 
-      result = Comparer.compare(winner_hands, handB)
-      assert result == winner_hands
+      assert result == [@four_of_a_kind_hand]
+    end
+
+    test "full_house over flush" do
+      result = Comparer.compare([@full_house_hand], @flush_hand)
+
+      assert result == [@full_house_hand]
     end
   end
 end
