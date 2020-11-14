@@ -23,6 +23,7 @@ defmodule Poker.Comparer do
   defp higher_ranking_hand(handA, handB) when handA.category === handB.category do
     compare_value(handA, handB)
   end
+
   defp higher_ranking_hand(handA, handB) do
     compare_ranking(handA, handB)
   end

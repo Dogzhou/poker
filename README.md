@@ -28,7 +28,7 @@ Suits (order doesn't matter): C D H S
 Example hand: ~w(4S 5H 4C 5D 4H) # Full house, 5s over 4s
 
 # Development Environment
-*Elixir 1.3.2
+* Elixir 1.11.1
 
 # Usage
 ```
