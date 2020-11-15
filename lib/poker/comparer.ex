@@ -16,7 +16,7 @@ defmodule Poker.Comparer do
     cond do
       winner_hand === handA -> winnerHands
       winner_hand === handB -> [handB]
-      winner_hand === [handA, handB] -> [winnerHands | handB]
+      winner_hand === [handA, handB] -> winnerHands ++ [handB]
     end
   end
 

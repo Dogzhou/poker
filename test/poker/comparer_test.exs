@@ -19,6 +19,13 @@ defmodule ComparerTest do
       assert result == [@straight_flush, @straight_flushB]
     end
 
+    test "tied straight_flush" do
+      same_ranking_straight_flush = Hand.init(~w(2C 3C 4C 5C 6C))
+      result = Comparer.compare([@straight_flush, @straight_flushB], same_ranking_straight_flush)
+
+      assert result == [@straight_flush, @straight_flushB, same_ranking_straight_flush]
+    end
+
     test "four_of_a_kind over full_house" do
       result = Comparer.compare([@four_of_a_kind], @full_house)
 
