@@ -29,7 +29,32 @@ defmodule Poker.Comparer do
   end
 
   defp compare_value(handA, handB) do
-    compare_ranking(handA, handB)
+    handA_values = values_of(handA)
+    handB_values = values_of(handB)
+
+    cond do
+      handA_values > handB_values -> handA
+      handA_values < handB_values -> handB
+      handA_values == handB_values -> [handA, handB]
+    end
+  end
+
+  defp values_of(hand) when hand.category in ~w(straight_flush straight)a do
+    hand.cards
+    |> Enum.at(0)
+    |> Map.get(:int_value)
+    |> List.wrap()
+  end
+
+  defp values_of(hand) when hand.category in ~w(flush high_card)a do
+    hand.cards
+    |> Enum.flat_map(&(Map.keys(&1)))
+  end
+
+  defp values_of(hand) do
+    hand.cards
+    |> Enum.group_by(&(&1.int_value))
+    |> Enum.sort_by(&{length(elem(&1, 1)), elem(&1, 0)}, :desc)
   end
 
   defp compare_ranking(handA, handB) do

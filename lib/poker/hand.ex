@@ -25,7 +25,7 @@ defmodule Poker.Hand do
   """
   @spec init(string :: [[String.t()]]) :: Hand.t()
   def init(input) do
-    cards = input |> Enum.map(&(Card.init(&1)))
+    cards    = Enum.map(input, &(Card.init(&1)))
     category = Classifier.classify(cards)
 
     %__MODULE__{

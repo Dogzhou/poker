@@ -12,6 +12,15 @@ defmodule ComparerTest do
   @one_pair        Hand.init(~w(2D 2C 3D 4H 5S))
   @high_card       Hand.init(~w(AC KD QS JH 9D))
 
+  describe "compared hands are in same category" do
+    test "straight" do
+      lower_straight = Hand.init(~w(2S 3D 4H 5S 6C))
+      result = Comparer.compare([@straight], lower_straight)
+
+      assert result == [@straight]
+    end
+  end
+
   describe "compared hands are in different category" do
     test "straight_flush over four_of_a_kind" do
       result = Comparer.compare([@straight_flush, @straight_flushB], @four_of_a_kind)
