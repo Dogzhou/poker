@@ -5,7 +5,7 @@ defmodule ComparerTest do
   @straight_flushB Hand.init(~w(2S 3S 4S 5S 6S))
   @four_of_a_kind  Hand.init(~w(JD AH AC AD AS))
   @full_house      Hand.init(~w(AD AC AS KC KD))
-  @flush           Hand.init(~w(3D 4D 5D 6D 8D))
+  @flush           Hand.init(~w(3D 4D 5D 7D 8D))
   @straight        Hand.init(~w(5D 6S 7D 8D 9D))
   @three_of_a_kind Hand.init(~w(AD AC AS KC QH))
   @two_pairs       Hand.init(~w(AD AC KS KH QD))
@@ -18,6 +18,48 @@ defmodule ComparerTest do
       result = Comparer.compare([@straight], lower_straight)
 
       assert result == [@straight]
+    end
+
+    test "full_house" do
+      lower_full_house = Hand.init(~w(AS AD AH QS QC))
+      result = Comparer.compare([@full_house], lower_full_house)
+
+      assert result == [@full_house]
+    end
+
+    test "flush" do
+      lower_flush = Hand.init(~w(AS AD AH QS JC))
+      result = Comparer.compare([@flush], lower_flush)
+
+      assert result == [@flush]
+    end
+
+    test "three_of_a_kind" do
+      lower_three_of_a_kind = Hand.init(~w(AS AD AH QS JC))
+      result = Comparer.compare([@three_of_a_kind], lower_three_of_a_kind)
+
+      assert result == [@three_of_a_kind]
+    end
+
+    test "two_pairs" do
+      lower_two_pairs = Hand.init(~w(KS KD QH QS JC))
+      result = Comparer.compare([@two_pairs], lower_two_pairs)
+
+      assert result == [@two_pairs]
+    end
+
+    test "one_pair" do
+      equal_one_pair = Hand.init(~w(2S 2D 3H 4S 5C))
+      result = Comparer.compare([@one_pair], equal_one_pair)
+
+      assert result == [@one_pair, equal_one_pair]
+    end
+
+    test "high_card" do
+      lower_high_card = Hand.init(~w(AS KD QH JS 8C))
+      result = Comparer.compare([@high_card], lower_high_card)
+
+      assert result == [@high_card]
     end
   end
 

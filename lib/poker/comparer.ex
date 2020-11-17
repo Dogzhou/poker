@@ -48,13 +48,14 @@ defmodule Poker.Comparer do
 
   defp values_of(hand) when hand.category in ~w(flush high_card)a do
     hand.cards
-    |> Enum.flat_map(&(Map.keys(&1)))
+    |> Enum.map(&(&1.int_value))
   end
 
   defp values_of(hand) do
     hand.cards
     |> Enum.group_by(&(&1.int_value))
     |> Enum.sort_by(&{length(elem(&1, 1)), elem(&1, 0)}, :desc)
+    |> Enum.map(&(elem(&1, 0)))
   end
 
   defp compare_ranking(handA, handB) do
