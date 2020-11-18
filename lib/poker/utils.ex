@@ -3,6 +3,7 @@ defmodule Poker.Utils do
   alias Poker.Card
 
   @doc """
+  Return the number of types of int values
   ## Examples
 
     iex> grouped_hand_values = %{2 => ["card1", "card2", "card3"], 4 => ["card4", "card5"] }

@@ -16,11 +16,11 @@ defmodule Poker.Hand do
     iex> Poker.Hand.init(~w(10D JD QD KD AD))
     %Poker.Hand{
       cards: [
-        %Poker.Card{suit: "D", display_value: "10", int_value: 10},
-        %Poker.Card{suit: "D", display_value: "J", int_value: 11},
-        %Poker.Card{suit: "D", display_value: "Q", int_value: 12},
-        %Poker.Card{suit: "D", display_value: "K", int_value: 13},
-        %Poker.Card{suit: "D", display_value: "A", int_value: 14}],
+        %Poker.Card{suit: "D", ranking: "10", int_value: 10},
+        %Poker.Card{suit: "D", ranking: "J", int_value: 11},
+        %Poker.Card{suit: "D", ranking: "Q", int_value: 12},
+        %Poker.Card{suit: "D", ranking: "K", int_value: 13},
+        %Poker.Card{suit: "D", ranking: "A", int_value: 14}],
       category: :straight_flush}
   """
   @spec init(string :: [[String.t()]]) :: Hand.t()
