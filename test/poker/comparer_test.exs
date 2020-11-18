@@ -20,6 +20,13 @@ defmodule ComparerTest do
       assert result == [@straight]
     end
 
+    test "ACE_as_low_value_straight" do
+      lower_straight = Hand.init(~w(AS 2D 3H 4S 5C))
+      result = Comparer.compare([@straight], lower_straight)
+
+      assert result == [@straight]
+    end
+
     test "full_house" do
       lower_full_house = Hand.init(~w(AS AD AH QS QC))
       result = Comparer.compare([@full_house], lower_full_house)

@@ -41,7 +41,7 @@ defmodule Poker.Comparer do
 
   defp values_of(hand) when hand.category in ~w(straight_flush straight)a do
     hand.cards
-    |> Enum.at(0)
+    |> Enum.at(-1)
     |> Map.get(:int_value)
     |> List.wrap()
   end
