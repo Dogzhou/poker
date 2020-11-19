@@ -11,7 +11,7 @@ defmodule Poker.Comparer do
   @spec compare(winnerHands :: [Hand.t()], handB :: Hand.t()) :: [Hand.t()]
   def compare(winnerHands, handB) do
     handA = Enum.at(winnerHands, 0)
-    winner_hand = higher_ranking_hand(handA, handB)
+    winner_hand = higher_hand(handA, handB)
 
     cond do
       winner_hand === handA -> winnerHands
@@ -20,11 +20,11 @@ defmodule Poker.Comparer do
     end
   end
 
-  defp higher_ranking_hand(handA, handB) when handA.category === handB.category do
+  defp higher_hand(handA, handB) when handA.category === handB.category do
     ValueComparer.compare(handA, handB)
   end
 
-  defp higher_ranking_hand(handA, handB) do
+  defp higher_hand(handA, handB) do
     CategoryComparer.compare(handA, handB)
   end
 end
