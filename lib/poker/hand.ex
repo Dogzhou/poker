@@ -1,8 +1,8 @@
 defmodule Poker.Hand do
   @moduledoc false
   alias Poker.{Card, Hand, Classifier}
-  @enforce_keys [:cards, :category, :display_string]
-  defstruct [:cards, :category, :display_string]
+  @enforce_keys [:cards, :category]
+  defstruct [:cards, :category]
 
   @type t() :: %__MODULE__{
     cards: [Card.t()],
@@ -21,19 +21,26 @@ defmodule Poker.Hand do
         %Poker.Card{suit: "D", ranking: "Q", int_value: 12},
         %Poker.Card{suit: "D", ranking: "K", int_value: 13},
         %Poker.Card{suit: "D", ranking: "A", int_value: 14}],
-      category: :straight_flush,
-      display_string: ~w(10D JD QD KD AD)}
+      category: :straight_flush}
   """
   @spec init(string :: [[String.t()]]) :: Hand.t()
   def init(input) do
     cards          = Enum.map(input, &(Card.init(&1)))
     category       = Classifier.classify(cards)
-    display_string = input
 
     %__MODULE__{
       cards: cards,
-      category: category,
-      display_string: display_string
+      category: category
     }
   end
+
+  @doc """
+  ## Examples
+
+    iex> hand = Poker.Hand.init(~w(10D JD QD KD AD))
+    iex> Poker.Hand.stringify(hand)
+    ~w(10D JD QD KD AD)
+  """
+  @spec stringify(hand :: Hand.t()) :: [String.t()]
+  def stringify(hand), do: Enum.map(hand.cards, &("#{&1.ranking}#{&1.suit}"))
 end

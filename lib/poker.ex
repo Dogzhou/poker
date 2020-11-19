@@ -1,18 +1,17 @@
 defmodule Poker do
-  @moduledoc """
-  Documentation for `Poker`.
-  """
+  @moduledoc false
+  alias Poker.{Hand, Comparer}
 
   @doc """
-  Hello world.
-
+  Given a list of poker hands, return a list containing the highest scoring hand.
   ## Examples
 
-      iex> Poker.hello()
-      :world
-
   """
-  def hello do
-    :world
+  @spec best_hand(list(list(String.t()))) :: list(list(String.t()))
+  def best_hand(hands) do
+    hands
+    |> Enum.map(&(Hand.init(&1)))
+    |> Comparer.compare()
+    |> Enum.map(&Hand.stringify(&1))
   end
 end

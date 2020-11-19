@@ -5,6 +5,9 @@ defmodule Poker.Comparer do
   alias Poker.Hand
   alias Poker.Comparer.{CategoryComparer, ValueComparer}
 
+  def compare(hands), do: Enum.reduce(hands, [], fn hand, acc -> compare(acc, hand) end)
+  def compare([], hand), do: [hand]
+
   @doc """
   compare two hands when they are in different category
   """
