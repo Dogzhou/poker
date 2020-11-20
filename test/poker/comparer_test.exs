@@ -29,13 +29,13 @@ defmodule Poker.ComparerTest do
 
   describe "winnerHands only have one hand" do
     test "winnerHands win" do
-      result = Poker.Comparer.compare([@hand, @equal_hand], @smaller_hand)
+      result = Poker.Comparer.compare([@hand], @smaller_hand)
 
-      assert result == [@hand, @equal_hand]
+      assert result == [@hand]
     end
 
     test "winnerHands lose" do
-      result = Poker.Comparer.compare([@hand, @equal_hand], @bigger_hand)
+      result = Poker.Comparer.compare([@hand], @bigger_hand)
 
       assert result == [@bigger_hand]
     end

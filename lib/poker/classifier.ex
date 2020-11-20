@@ -5,7 +5,7 @@ defmodule Poker.Classifier do
   alias Poker.{Card, Utils}
   @type category :: :flush | :four_of_a_kind | :full_house | :high_card | :one_pair | :straight | :straight_flush | :three_of_a_kind | :two_pairs
   @ace_high_straight "2345678910JQKA"
-  @ace_low_straight  "A2345678910JQK"
+  @ace_low_straight  "2345A"
 
   @doc """
   Return a category for cards
@@ -41,7 +41,8 @@ defmodule Poker.Classifier do
   end
 
   defp straight?(cards) do
-    hand_values = Enum.map_join(cards, "", &(&1.ranking))
+    sorted_cards = Enum.sort_by(cards, &(&1.int_value))
+    hand_values = Enum.map_join(sorted_cards, "", &(&1.ranking))
 
     @ace_high_straight =~ hand_values || @ace_low_straight =~ hand_values
   end
