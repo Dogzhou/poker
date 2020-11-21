@@ -3,16 +3,16 @@ defmodule Poker.BestHand.DifferentCategoryBestHandTest do
   alias Poker.Hand
   alias Poker.BestHand.DifferentCategoryBestHand
 
-  @straight_flush  Hand.init(~w(2D 3D 4D 5D 6D))
+  @straight_flush Hand.init(~w(2D 3D 4D 5D 6D))
   @straight_flushB Hand.init(~w(2S 3S 4S 5S 6S))
-  @four_of_a_kind  Hand.init(~w(JD AH AC AD AS))
-  @full_house      Hand.init(~w(AD AC AS KC KD))
-  @flush           Hand.init(~w(3D 4D 5D 7D 8D))
-  @straight        Hand.init(~w(5D 6S 7D 8D 9D))
+  @four_of_a_kind Hand.init(~w(JD AH AC AD AS))
+  @full_house Hand.init(~w(AD AC AS KC KD))
+  @flush Hand.init(~w(3D 4D 5D 7D 8D))
+  @straight Hand.init(~w(5D 6S 7D 8D 9D))
   @three_of_a_kind Hand.init(~w(AD AC AS KC QH))
-  @two_pairs       Hand.init(~w(AD AC KS KH QD))
-  @one_pair        Hand.init(~w(2D 2C 3D 4H 5S))
-  @high_card       Hand.init(~w(AC KD QS JH 9D))
+  @two_pairs Hand.init(~w(AD AC KS KH QD))
+  @one_pair Hand.init(~w(2D 2C 3D 4H 5S))
+  @high_card Hand.init(~w(AC KD QS JH 9D))
 
   test "straight_flush over four_of_a_kind" do
     result = DifferentCategoryBestHand.find(@straight_flush, @four_of_a_kind)

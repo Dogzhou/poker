@@ -11,23 +11,23 @@ defmodule Poker.BestHand do
   @doc """
   find higher hand from current winner hands and another hand
   """
-  @spec find(winnerHands :: [Hand.t()], handB :: Hand.t()) :: [Hand.t()]
-  def find(winnerHands, handB) do
-    handA = Enum.at(winnerHands, 0)
-    winner_hand = find_winner_hand(handA, handB)
+  @spec find(winner_hands :: [Hand.t()], next_hand :: Hand.t()) :: [Hand.t()]
+  def find(winner_hands, next_hand) do
+    handA = Enum.at(winner_hands, 0)
+    winner_hand = find_winner_hand(handA, next_hand)
 
     cond do
-      winner_hand === handA -> winnerHands
-      winner_hand === handB -> [handB]
-      winner_hand === [handA, handB] -> winnerHands ++ [handB]
+      winner_hand === handA -> winner_hands
+      winner_hand === next_hand -> [next_hand]
+      winner_hand === [handA, next_hand] -> winner_hands ++ [next_hand]
     end
   end
 
-  defp find_winner_hand(handA, handB) when handA.category === handB.category do
-    SameCategoryBestHand.find(handA, handB)
+  defp find_winner_hand(handA, next_hand) when handA.category === next_hand.category do
+    SameCategoryBestHand.find(handA, next_hand)
   end
 
-  defp find_winner_hand(handA, handB) do
-    DifferentCategoryBestHand.find(handA, handB)
+  defp find_winner_hand(handA, next_hand) do
+    DifferentCategoryBestHand.find(handA, next_hand)
   end
 end

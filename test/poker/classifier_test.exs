@@ -110,4 +110,3 @@ defmodule ClassifierTest do
     end
   end
 end
-

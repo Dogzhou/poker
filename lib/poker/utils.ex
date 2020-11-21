@@ -36,7 +36,7 @@ defmodule Poker.Utils do
   def large_value_size(grouped_hand_values) do
     grouped_hand_values
     |> Map.values()
-    |> Enum.max_by(&(length(&1)))
+    |> Enum.max_by(&length/1)
     |> length()
   end
 end

@@ -15,8 +15,8 @@ defmodule Poker do
   @spec best_hand(list(list(String.t()))) :: list(list(String.t()))
   def best_hand(hands) do
     hands
-    |> Enum.map(&(Hand.init(&1)))
+    |> Enum.map(&Hand.init(&1))
     |> BestHand.find()
-    |> Enum.map(&(&1.display_string))
+    |> Enum.map(& &1.display_string)
   end
 end

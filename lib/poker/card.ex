@@ -5,10 +5,10 @@ defmodule Poker.Card do
   alias Poker.Card
 
   @type t() :: %__MODULE__{
-    suit: String.t(),
-    ranking: String.t(),
-    int_value: integer()
-  }
+          suit: String.t(),
+          ranking: String.t(),
+          int_value: integer()
+        }
 
   @doc """
   Init Card struct
@@ -22,7 +22,7 @@ defmodule Poker.Card do
   """
   @spec init(string :: String.t()) :: Card.t()
   def init(string) do
-    suit  = String.at(string, -1)
+    suit = String.at(string, -1)
     ranking = String.slice(string, 0..-2)
     int_value = get_int_value(ranking)
 

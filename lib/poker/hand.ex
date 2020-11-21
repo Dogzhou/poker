@@ -5,10 +5,10 @@ defmodule Poker.Hand do
   defstruct [:cards, :category, :display_string]
 
   @type t() :: %__MODULE__{
-    cards: [Card.t()],
-    category: Classifier.category,
-    display_string: [String.t()]
-  }
+          cards: [Card.t()],
+          category: Classifier.category(),
+          display_string: [String.t()]
+        }
 
   @doc """
   Init Hand struct
@@ -27,7 +27,7 @@ defmodule Poker.Hand do
   """
   @spec init(string :: [[String.t()]]) :: Hand.t()
   def init(input) do
-    cards    = sorted_cards(input)
+    cards = sorted_cards(input)
     category = Classifier.classify(cards)
 
     %__MODULE__{
@@ -40,6 +40,6 @@ defmodule Poker.Hand do
   defp sorted_cards(input) do
     input
     |> Enum.map(&Card.init/1)
-    |> Enum.sort_by(&(&1.int_value))
+    |> Enum.sort_by(& &1.int_value)
   end
 end
