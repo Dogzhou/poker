@@ -1,7 +1,8 @@
-defmodule Poker.Comparer.CategoryComparerTest do
+defmodule Poker.BestHand.DifferentCategoryBestHandTest do
   use ExUnit.Case, async: true
   alias Poker.Hand
-  alias Poker.Comparer.CategoryComparer
+  alias Poker.BestHand.DifferentCategoryBestHand
+
   @straight_flush  Hand.init(~w(2D 3D 4D 5D 6D))
   @straight_flushB Hand.init(~w(2S 3S 4S 5S 6S))
   @four_of_a_kind  Hand.init(~w(JD AH AC AD AS))
@@ -14,55 +15,55 @@ defmodule Poker.Comparer.CategoryComparerTest do
   @high_card       Hand.init(~w(AC KD QS JH 9D))
 
   test "straight_flush over four_of_a_kind" do
-    result = CategoryComparer.compare(@straight_flush, @four_of_a_kind)
+    result = DifferentCategoryBestHand.find(@straight_flush, @four_of_a_kind)
 
     assert result == @straight_flush
   end
 
   test "tied straight_flush" do
-    result = CategoryComparer.compare(@straight_flush, @straight_flushB)
+    result = DifferentCategoryBestHand.find(@straight_flush, @straight_flushB)
 
     assert result == [@straight_flush, @straight_flushB]
   end
 
   test "four_of_a_kind over full_house" do
-    result = CategoryComparer.compare(@four_of_a_kind, @full_house)
+    result = DifferentCategoryBestHand.find(@four_of_a_kind, @full_house)
 
     assert result == @four_of_a_kind
   end
 
   test "full_house over flush" do
-    result = CategoryComparer.compare(@full_house, @flush)
+    result = DifferentCategoryBestHand.find(@full_house, @flush)
 
     assert result == @full_house
   end
 
   test "flush over straight" do
-    result = CategoryComparer.compare(@straight, @flush)
+    result = DifferentCategoryBestHand.find(@straight, @flush)
 
     assert result == @flush
   end
 
   test "straight over three_of_a_kind" do
-    result = CategoryComparer.compare(@three_of_a_kind, @straight)
+    result = DifferentCategoryBestHand.find(@three_of_a_kind, @straight)
 
     assert result == @straight
   end
 
   test "three_of_a_kind over two_pairs" do
-    result = CategoryComparer.compare(@three_of_a_kind, @two_pairs)
+    result = DifferentCategoryBestHand.find(@three_of_a_kind, @two_pairs)
 
     assert result == @three_of_a_kind
   end
 
   test "two_pairs over one_pair" do
-    result = CategoryComparer.compare(@one_pair, @two_pairs)
+    result = DifferentCategoryBestHand.find(@one_pair, @two_pairs)
 
     assert result == @two_pairs
   end
 
   test "one_pair over high_card" do
-    result = CategoryComparer.compare(@one_pair, @high_card)
+    result = DifferentCategoryBestHand.find(@one_pair, @high_card)
 
     assert result == @one_pair
   end

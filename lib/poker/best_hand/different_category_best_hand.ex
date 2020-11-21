@@ -1,7 +1,6 @@
-defmodule Poker.Comparer.CategoryComparer do
+defmodule Poker.BestHand.DifferentCategoryBestHand do
   @moduledoc """
-  compare hands when they are in different category
-  returns the higher hand
+  Return higher hand from two hands when they are in different category
   """
   @category_high_to_low ~w(
     straight_flush
@@ -15,7 +14,8 @@ defmodule Poker.Comparer.CategoryComparer do
     high_card
   )a
 
-  def compare(handA, handB) do
+  @spec find(handA :: Hand.t(), handB :: Hand.t()) :: Hand.t() | [Hand.t()]
+  def find(handA, handB) do
     handA_ranking = ranking_of_category(handA.category)
     handB_ranking = ranking_of_category(handB.category)
 

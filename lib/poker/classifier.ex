@@ -41,10 +41,13 @@ defmodule Poker.Classifier do
   end
 
   defp straight?(cards) do
-    sorted_cards = Enum.sort_by(cards, &(&1.int_value))
-    hand_values = Enum.map_join(sorted_cards, "", &(&1.ranking))
+    @ace_high_straight =~ hand_values(cards) || @ace_low_straight =~ hand_values(cards)
+  end
 
-    @ace_high_straight =~ hand_values || @ace_low_straight =~ hand_values
+  defp hand_values(cards) do
+    cards
+    |> Enum.sort_by(&(&1.int_value))
+    |> Enum.map_join("", &(&1.ranking))
   end
 
   defp four_of_a_kind?(grouped_hand_values) do

@@ -1,8 +1,11 @@
-defmodule Poker.Comparer.ValueComparer do
+defmodule Poker.BestHand.SameCategoryBestHand do
   @moduledoc """
-  Compare two hands when they are in same category returns the higher hand
+  Return higher hand from two hands when they are in same category
   """
-  def compare(handA, handB) do
+  alias Poker.Hand
+
+  @spec find(handA :: Hand.t(), handB :: Hand.t()) :: Hand.t() | [Hand.t()]
+  def find(handA, handB) do
     handA_values = values_of(handA)
     handB_values = values_of(handB)
 

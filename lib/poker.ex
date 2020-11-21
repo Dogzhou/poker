@@ -1,6 +1,6 @@
 defmodule Poker do
   @moduledoc false
-  alias Poker.{Hand, Comparer}
+  alias Poker.{Hand, BestHand}
 
   @doc """
   Given a list of poker hands, return a list containing the highest scoring hand.
@@ -16,7 +16,7 @@ defmodule Poker do
   def best_hand(hands) do
     hands
     |> Enum.map(&(Hand.init(&1)))
-    |> Comparer.compare()
+    |> BestHand.find()
     |> Enum.map(&(&1.display_string))
   end
 end

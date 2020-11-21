@@ -1,7 +1,7 @@
-defmodule Poker.Comparer.ValueComparerTest do
+defmodule Poker.BestHand.SameCategoryBestHandTest do
   use ExUnit.Case, async: true
   alias Poker.Hand
-  alias Poker.Comparer.ValueComparer
+  alias Poker.BestHand.SameCategoryBestHand
 
   @straight_flush  Hand.init(~w(2D 3D 4D 5D 6D))
   @four_of_a_kind  Hand.init(~w(JD AH AC AD AS))
@@ -15,70 +15,70 @@ defmodule Poker.Comparer.ValueComparerTest do
 
   test "straight_flush" do
     lower_straight_flush = Hand.init(~w(AS 2S 3S 4S 5S))
-    result = ValueComparer.compare(@straight_flush, lower_straight_flush)
+    result = SameCategoryBestHand.find(@straight_flush, lower_straight_flush)
 
     assert result == @straight_flush
   end
 
   test "straight" do
     lower_straight = Hand.init(~w(2S 3D 4H 5S 6C))
-    result = ValueComparer.compare(@straight, lower_straight)
+    result = SameCategoryBestHand.find(@straight, lower_straight)
 
     assert result == @straight
   end
 
   test "ACE_as_low_value_straight" do
     lower_straight = Hand.init(~w(AS 2D 3H 4S 5C))
-    result = ValueComparer.compare(@straight, lower_straight)
+    result = SameCategoryBestHand.find(@straight, lower_straight)
 
     assert result == @straight
   end
 
   test "four_of_a_kind" do
     lower_four_of_a_kind = Hand.init(~w(AS AD AH AS 9C))
-    result = ValueComparer.compare(@four_of_a_kind, lower_four_of_a_kind)
+    result = SameCategoryBestHand.find(@four_of_a_kind, lower_four_of_a_kind)
 
     assert result == @four_of_a_kind
   end
 
   test "full_house" do
     lower_full_house = Hand.init(~w(AS AD AH QS QC))
-    result = ValueComparer.compare(@full_house, lower_full_house)
+    result = SameCategoryBestHand.find(@full_house, lower_full_house)
 
     assert result == @full_house
   end
 
   test "flush" do
     lower_flush = Hand.init(~w(2S 3D 4H 5S 7C))
-    result = ValueComparer.compare(@flush, lower_flush)
+    result = SameCategoryBestHand.find(@flush, lower_flush)
 
     assert result == @flush
   end
 
   test "three_of_a_kind" do
     lower_three_of_a_kind = Hand.init(~w(AS AD AH QS JC))
-    result = ValueComparer.compare(@three_of_a_kind, lower_three_of_a_kind)
+    result = SameCategoryBestHand.find(@three_of_a_kind, lower_three_of_a_kind)
 
     assert result == @three_of_a_kind
   end
 
   test "two_pairs" do
     lower_two_pairs = Hand.init(~w(KS KD QH QS JC))
-    result = ValueComparer.compare(@two_pairs, lower_two_pairs)
+    result = SameCategoryBestHand.find(@two_pairs, lower_two_pairs)
 
     assert result == @two_pairs
   end
 
   test "one_pair" do
     equal_one_pair = Hand.init(~w(2S 2D 3H 4S 5C))
-    result = ValueComparer.compare(@one_pair, equal_one_pair)
+    result = SameCategoryBestHand.find(@one_pair, equal_one_pair)
 
     assert result == [@one_pair, equal_one_pair]
   end
 
   test "high_card" do
     lower_high_card = Hand.init(~w(AS KD QH JS 8C))
-    result = ValueComparer.compare(@high_card, lower_high_card)
+    result = SameCategoryBestHand.find(@high_card, lower_high_card)
 
     assert result == @high_card
   end
