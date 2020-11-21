@@ -4,7 +4,7 @@ defmodule Poker.BestHand.DifferentCategoryBestHandTest do
   alias Poker.BestHand.DifferentCategoryBestHand
 
   @straight_flush Hand.init(~w(2D 3D 4D 5D 6D))
-  @straight_flushB Hand.init(~w(2S 3S 4S 5S 6S))
+  @straight_flush2 Hand.init(~w(2S 3S 4S 5S 6S))
   @four_of_a_kind Hand.init(~w(JD AH AC AD AS))
   @full_house Hand.init(~w(AD AC AS KC KD))
   @flush Hand.init(~w(3D 4D 5D 7D 8D))
@@ -21,9 +21,9 @@ defmodule Poker.BestHand.DifferentCategoryBestHandTest do
   end
 
   test "tied straight_flush" do
-    result = DifferentCategoryBestHand.find(@straight_flush, @straight_flushB)
+    result = DifferentCategoryBestHand.find(@straight_flush, @straight_flush2)
 
-    assert result == [@straight_flush, @straight_flushB]
+    assert result == [@straight_flush, @straight_flush2]
   end
 
   test "four_of_a_kind over full_house" do

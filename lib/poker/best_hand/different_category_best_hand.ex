@@ -2,6 +2,7 @@ defmodule Poker.BestHand.DifferentCategoryBestHand do
   @moduledoc """
   Return higher hand from two hands when they are in different category
   """
+  alias Poker.Hand
   @category_high_to_low ~w(
     straight_flush
     four_of_a_kind
@@ -14,19 +15,19 @@ defmodule Poker.BestHand.DifferentCategoryBestHand do
     high_card
   )a
 
-  @spec find(handA :: Hand.t(), handB :: Hand.t()) :: Hand.t() | [Hand.t()]
-  def find(handA, handB) do
-    handA_ranking = ranking_of_category(handA.category)
-    handB_ranking = ranking_of_category(handB.category)
+  @spec find(current_winner_hand :: Hand.t(), next_hand :: Hand.t()) :: Hand.t() | [Hand.t()]
+  def find(current_winner_hand, next_hand) do
+    current_winner_hand_index = index_of_category(current_winner_hand.category)
+    next_hand_index = index_of_category(next_hand.category)
 
-    case handA_ranking - handB_ranking do
-      x when x < 0 -> handA
-      x when x > 0 -> handB
-      x when x === 0 -> [handA, handB]
+    case current_winner_hand_index - next_hand_index do
+      x when x < 0 -> current_winner_hand
+      x when x > 0 -> next_hand
+      x when x === 0 -> [current_winner_hand, next_hand]
     end
   end
 
-  def ranking_of_category(category) do
+  def index_of_category(category) do
     Enum.find_index(@category_high_to_low, &(&1 == category))
   end
 end
