@@ -63,17 +63,13 @@ jobs:
   generate_documentation:
     docker:
     - image: circleci/elixir:1.11.1
-      environment:
-        MIX_ENV: test
-
     steps:
     - checkout
     - restore_cache:
         keys:
           - v1-dependency-cache-{{ checksum "mix.lock" }}
           - v1-dependency-cache
-    - run: mix do docs
-
+    - run: mix docs
     - store_artifacts:
         path: doc
         destination: documentation

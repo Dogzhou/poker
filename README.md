@@ -1,5 +1,7 @@
 # Poker
 
+[![CircleCI](https://circleci.com/gh/edxzh/poker.svg?style=svg)](https://circleci.com/gh/edxzh/poker)
+
 Given a list of poker hands, return a list containing the highest scoring hand.
 
 If two or more hands tie, return the list of tied hands in the order they were received.
