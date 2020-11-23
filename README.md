@@ -42,6 +42,17 @@ iex(4)> Poker.best_hand([high_of_8, high_of_10, high_of_jack])
 iex(5)> [high_of_jack]
 ```
 
+or in docker
+```
+$ docker build -t poker .
+$ docker run -ti poker iex -S mix
+iex(1)> high_of_8 = ~w(4D 5S 6S 8D 3C)
+iex(2)> high_of_10 = ~w(2S 4C 7S 9H 10H)
+iex(3)> high_of_jack = ~w(3S 4S 5D 6H JH)
+iex(4)> Poker.best_hand([high_of_8, high_of_10, high_of_jack])
+iex(5)> [high_of_jack]
+```
+
 ## License
 
 Licensed under [MIT](http://edwardzhou.mit-license.org/).

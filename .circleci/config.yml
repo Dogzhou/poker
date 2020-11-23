@@ -57,8 +57,11 @@ jobs:
           - v1-dependency-cache
     - run: mix dialyzer --halt-exit-status
     - run: mix credo
-    - run: mix test
+    - run: mix coveralls.html
     - run: mix format --check-formatted
+    - store_artifacts:
+        path: cover
+        destination: test_coverage
 
   generate_documentation:
     docker:
