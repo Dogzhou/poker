@@ -27,7 +27,7 @@ defmodule Poker.BestHand.DifferentCategoryBestHand do
     end
   end
 
-  def index_of_category(category) do
+  defp index_of_category(category) do
     Enum.find_index(@category_high_to_low, &(&1 == category))
   end
 end
